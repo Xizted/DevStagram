@@ -33,8 +33,12 @@ class PerfilController extends Controller
             'new_password_confirmation' => 'same:new_password'
         ]);
 
-        if (!auth()->attempt(["email" => auth()->user()->email, "password" => $request->password])) {
-            return back()->with('mensaje', 'Contraseña Incorrecta');
+        if (!Hash::check($request->password, auth()->user()->password)) {
+            return back()->withErrors(
+                [
+                    'password' => ['Contraseña Incorrecta']
+                ]
+            );
         };
 
         if ($request->imagen) {
