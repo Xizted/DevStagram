@@ -29,7 +29,7 @@ class PerfilController extends Controller
             'username' => 'required|unique:users,username,' . auth()->user()->id . '|min:3|max:20',
             'email' => 'required|unique:users,email,' . auth()->user()->id . '|email|max:60',
             'password' => 'confirmed|min:6',
-            'new_password' => 'min:6',
+            'new_password' => 'sometimes:min:6',
             'new_password_confirmation' => 'same:new_password'
         ]);
 
