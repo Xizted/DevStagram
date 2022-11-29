@@ -20,6 +20,8 @@ class HomeController extends Controller
 
         $ids = auth()->user()->followings->pluck('id')->toArray();
         $posts = Post::whereIn('user_id', $ids)->latest()->paginate(20);
+        // $posts = Post::inRandomOrder()->paginate(20);
+
 
         return view('home', ["posts" => $posts]);
     }
